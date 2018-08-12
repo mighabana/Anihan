@@ -1,0 +1,83 @@
+{% extends "buyer_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="green col s12">
+        <h7 class="green-text">test</h7>
+    </div>
+</div>
+<div class="row">
+    <div class="col s3">
+        <div style="width:250px; height: 150px" class="amber darken-3 white-text card">
+            <h5 style="margin-left: 10px; padding-top:10px">Pending:</h5>
+            <div class="center">
+                <h1>{{ pending }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col s3">
+        <div style="width:250px; height: 150px" class="teal darken-2 white-text card">
+            <h5 style="margin-left: 10px; padding-top:10px">For Pickup:</h5>
+            <div class="center">
+                <h1>{{ pickup }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col s3">
+        <div style="width:250px; height: 150px" class="blue darken-4 white-text card">
+            <h5 style="margin-left: 10px; padding-top:10px">Completed:</h5>
+            <div class="center">
+                <h1>{{ completed }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col s3">
+            <div style="width:250px; height: 150px" class="black white-text card">
+                <h5 style="margin-left: 10px; padding-top:10px">Total Amount Spent:</h5>
+                <div class="center">
+                    <h3 style="padding:10px">{{ total_price }}</h3>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+{% if orders %}
+    <div class="row">
+        {% for order in orders %}
+        <div class="col s12">
+            <div class="card">
+                {% if order.order_status == 0 %}
+                    <div class="activator waves-effect waves-block waves-light amber darken-3 amber-text text-darken-3">
+                        <h7>Activator</h7>
+                    </div>
+                {% elif order.order_status == 1 %}
+                    <div class="activator waves-effect waves-block waves-light teal darken-2 teal-text text-darken-2">
+                        <h7>Activator</h7>
+                    </div>
+                {% else %}
+                    <div class="activator waves-effect waves-block waves-light blue darken-4 blue-text text-darken-4">
+                        <h7>Activator</h7>
+                    </div>
+                {% endif %}
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{ order.produce_id.name }}<i class="material-icons right">more_vert</i></span>
+                    <p>{{ order.created_at }}</p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Total Price: Php {{ order.total_price }}<i class="material-icons right">close</i></span>
+                    <p>Order Quantity: {{ order.quantity }} kg(s)</p>
+                    <p>You can check out the farms that source this item <a href="#" class="green-text"><u>here</u></a></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="center grey-text text-darken-2">
+        <h6>You haven't placed any orders yet...</h6>
+    </div>
+{% endif %}
+{% endblock %}

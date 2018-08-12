@@ -1,0 +1,37 @@
+
+.wrapper {
+    padding-left: 300px;
+}
+
+ .tabs .tab a:focus.active {
+    background: #ffc107 ;
+    color: #212121;
+  }
+  
+  .tabs .tab a:hover {
+    background:#ffe082 ;
+    color: #616161;
+  }
+  
+  .tabs .tab a {
+    color: #ffffff;
+  }
+
+  .tabs .indicator {
+    background-color:#000;
+}
+
+  nav {
+    height: 50px;
+    line-height: 50px;
+  }
+  
+  nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 50px;
+    line-height: 50px;
+  }
+  
+  nav .button-collapse i {
+    height: 50px;
+    line-height: 50px;
+  }

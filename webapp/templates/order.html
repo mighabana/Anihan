@@ -1,0 +1,50 @@
+{% extends "buyer_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="green col s12">
+        <ul class="green grey-text text-darken-3 tabs" id="tabs">
+            <li class="tab col s2"><a class="tabby" href="/order/vegetables/">Vegetables</a></li>
+            <li class="tab col s2"><a class="tabby" href="/order/fruits/">Fruits</a></li>
+            <li class="tab col s2"><a class="tabby" href="/order/livestock/">Livestock</a></li>
+            <li class="tab col s2"><a class="tabby" href="/order/poultry/">Poultry</a></li>
+            <li class="tab col s2"><a class="tabby" href="/order/fisheries/">Fisheries</a></li>
+            <li class="tab col s2"><a class="tabby" href="/order/grains/">Grains</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    {% for item in produce %}
+    <div class="col s12 m4 offset-m1">
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light" style="overflow:hidden; height:200px">
+                <img class="activator" src="{% static  item.image_path %}">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{ item.name }}<i class="material-icons right">more_vert</i></span>
+                <p>Php {{ item.price }} / kg</p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">{{ item.name }}<i class="material-icons right">close</i></span>
+                <p>You can check out the farms that source this item <a href="#" class="green-text"><u>here</u></a></p>
+                <form action="/order/submit/" method="POST">
+                    {% csrf_token %}
+                    <div class="input-field col s6 offset-s3">
+                        <input name="produce_id" type="hidden" value="{{ item.id }}"/>
+                        <input name="quantity" id="quantity" type="number"/>
+                        <label for="quantity">Quantity</label>
+                    </div>
+                    <div class="center">
+                        <button class="amber btn"><i class="material-icons left">add_shopping_cart</i>Add to Cart</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
